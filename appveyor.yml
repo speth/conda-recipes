@@ -38,6 +38,12 @@ environment:
 
 install:
   - cmd: set PATH=%PYTHON_LOC%;%PYTHON_LOC%\Scripts;%PATH%
+  - cmd: echo %PATH%
+  - cmd: dir c:\
+  - cmd: dir c:\Miniconda
+  - cmd: dir c:\Miniconda\Scripts
+  - cmd: dir c:\Miniconda-x64
+  - cmd: dir c:\Miniconda-x64\Scripts
   - cmd: conda install -yq anaconda-client conda=4.2.13 conda-build=2.0.12
   - cmd: conda info -a
   - cmd: conda list
