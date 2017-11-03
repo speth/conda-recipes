@@ -8,20 +8,26 @@ source:
     git_tag: master
 build:
     number: 0
-    string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}
     entry_points:
       - ck2cti = cantera.ck2cti:script_entry_point
       - ctml_writer = cantera.ctml_writer:main
 requirements:
     build:
-      - python >=2.7,<3|>=3.3,{{PY_VER}}*
-      - numpy >=1.8.1,{{NPY_VER}}*
-      - mkl # [linux]
+      - python {{ python }}
+      - numpy {{ numpy }}
+      - mkl  # [not win]
+      - {{ compiler('c') }}
+      - scons >=3.0
+      - cython >=0.19
+      - libboost
+      - 3to2   # [py2k]
+      - pywin32  # [win]
     run:
-      - python {{PY_VER}}*
-      - numpy {{NPY_VER}}*
-      - mkl # [linux]
-      - vs2015_runtime # [win]
+      - python {{ python }}
+      - {{ pin_compatible('numpy', min_pin='x.x', max_pin='x.x') }}
+      - {{ pin_compatible('mkl') }}  # [not win]
+      - {{ pin_compatible('c') }}
+      - vs2015_runtime  # [win]
 test:
     imports:
       - cantera
