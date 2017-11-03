@@ -33,3 +33,7 @@ test:
 about:
     home: http://www.cantera.org
     summary: "Chemical kinetics, thermodynamics, and transport tool suite"
+    license: BSD-3-Clause
+    license_family: BSD
+    license_file: License.txt
+    dev_url: https://github.com/cantera/cantera
