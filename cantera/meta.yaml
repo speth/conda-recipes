@@ -9,8 +9,6 @@ source:
 build:
     number: 0
     string: np{{CONDA_NPY}}py{{CONDA_PY}}_{{PKG_BUILDNUM}}
-    script_env:
-      - CONDA_ARCH
     entry_points:
       - ck2cti = cantera.ck2cti:script_entry_point
       - ctml_writer = cantera.ctml_writer:main
