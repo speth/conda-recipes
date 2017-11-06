@@ -26,7 +26,6 @@ requirements:
       - python {{ python }}
       - {{ pin_compatible('numpy', min_pin='x.x', max_pin='x.x') }}
       - {{ pin_compatible('mkl') }}  # [not win]
-      - {{ pin_compatible('c') }}
       - vs2015_runtime  # [win]
 test:
     imports:
