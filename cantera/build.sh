@@ -27,7 +27,7 @@ else
     scons build -j$((CPU_COUNT/2)) python3_package='y' python3_cmd=$PYTHON python_package='none'
 fi
 
-# Change to the Python interface directory and run the installer using the
-# proper version of Python.
+# Change to the Python interface directory and run the installer
 cd interfaces/cython
+PY_MAJ_VER=${PY_VER:0:1}
 $PYTHON setup${PY_MAJ_VER}.py build --build-lib=../../build/python${PY_MAJ_VER} install
