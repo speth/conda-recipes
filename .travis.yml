@@ -29,7 +29,7 @@ install:
   - conda config --set always_yes yes --set changeps1 no
   - conda config --append channels conda-forge
   - conda config --append channels cantera/label/builddeps
-  - conda install -q anaconda-client conda-build=2.1.15 conda=4.3.21
+  - conda install -q anaconda-client conda-build=3.0.28 conda=4.3.30
   - conda info -a
   - conda list
 
