@@ -41,12 +41,12 @@ pythons = {
 travis_env = 'BUILD_PYTHON="{python}" BUILD_ARCH="{arch}" BUILD_NPY="{numpy}"'
 
 travis_matrix = []
-for arch, python in product(['x86', 'x64'], pythons.keys()):
+for arch, python in product(['x86', 'x86_64'], pythons.keys()):
     for numpy in pythons[python]:
         env = travis_env.format(python=python, arch=arch, numpy=numpy)
         travis_matrix.append({'os': 'linux', 'env': env})
 
-for arch, python in product(['x64'], pythons.keys()):
+for arch, python in product(['x86_64'], pythons.keys()):
     for numpy in pythons[python]:
         env = travis_env.format(python=python, arch=arch, numpy=numpy)
         travis_matrix.append({'os': 'osx', 'env': env})
@@ -61,9 +61,12 @@ with open('.travis.yml', 'w') as travis_file:
 
 appveyor_matrix = []
 for arch, python in product(['32', '64'], pythons.keys()):
+    suffix = '-x64' if arch == '64' else ''
+    py_ver = python.replace('.', '') if python in ['3.5', '3.6'] else ''
+    PYTHON_LOC = "C:\\Miniconda{py_ver}{suffix}".format(py_ver=py_ver, suffix=suffix)
     for numpy in pythons[python]:
         env = {
-            'PYTHON_LOC': "C:\\Miniconda" if arch == '32' else "C:\\Miniconda-x64",
+            'PYTHON_LOC': PYTHON_LOC,
             'PYTHON_VERSION': "{}".format(python),
             'BUILD_ARCH': "{}".format(arch),
             'BUILD_NPY': "{}".format(numpy),

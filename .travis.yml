@@ -17,12 +17,13 @@ install:
   - export CONDA_ARCH="${TRAVIS_OS_NAME}_${BUILD_ARCH}"
   # Using Miniconda 2 saves having to download Python 2 for the cantera-builder environment
   - |
-    if [[ "$CONDA_ARCH" == "linux_x64" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86_64.sh -O miniconda.sh;
-    elif [[ "$CONDA_ARCH" == "linux_x86" ]]; then
-      wget https://repo.continuum.io/miniconda/Miniconda2-latest-Linux-x86.sh -O miniconda.sh;
-    elif [[ "$CONDA_ARCH" == "osx_x64" ]]; then
-      curl https://repo.continuum.io/miniconda/Miniconda2-latest-MacOSX-x86_64.sh -o miniconda.sh;
+    export PY_MAJ_VER=${BUILD_PYTHON:0:1};
+    if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
+      export URL="https://repo.continuum.io/miniconda/Miniconda${PY_MAJ_VER}-latest-Linux-${BUILD_ARCH}.sh";
+      wget ${URL} -O miniconda.sh;
+    elif [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+      export URL="https://repo.continuum.io/miniconda/Miniconda${PY_MAJ_VER}-latest-MacOSX-${BUILD_ARCH}.sh";
+      curl ${URL} -o miniconda.sh;
     fi
   - bash miniconda.sh -b -p $HOME/miniconda
   - export PATH="$HOME/miniconda/bin:$PATH"
@@ -59,26 +60,26 @@ matrix:
       - os: linux
         env: BUILD_PYTHON="3.6" BUILD_ARCH="x86" BUILD_NPY="1.13"
       - os: linux
-        env: BUILD_PYTHON="2.7" BUILD_ARCH="x64" BUILD_NPY="1.12"
+        env: BUILD_PYTHON="2.7" BUILD_ARCH="x86_64" BUILD_NPY="1.12"
       - os: linux
-        env: BUILD_PYTHON="2.7" BUILD_ARCH="x64" BUILD_NPY="1.13"
+        env: BUILD_PYTHON="2.7" BUILD_ARCH="x86_64" BUILD_NPY="1.13"
       - os: linux
-        env: BUILD_PYTHON="3.5" BUILD_ARCH="x64" BUILD_NPY="1.12"
+        env: BUILD_PYTHON="3.5" BUILD_ARCH="x86_64" BUILD_NPY="1.12"
       - os: linux
-        env: BUILD_PYTHON="3.5" BUILD_ARCH="x64" BUILD_NPY="1.13"
+        env: BUILD_PYTHON="3.5" BUILD_ARCH="x86_64" BUILD_NPY="1.13"
       - os: linux
-        env: BUILD_PYTHON="3.6" BUILD_ARCH="x64" BUILD_NPY="1.12"
+        env: BUILD_PYTHON="3.6" BUILD_ARCH="x86_64" BUILD_NPY="1.12"
       - os: linux
-        env: BUILD_PYTHON="3.6" BUILD_ARCH="x64" BUILD_NPY="1.13"
+        env: BUILD_PYTHON="3.6" BUILD_ARCH="x86_64" BUILD_NPY="1.13"
       - os: osx
-        env: BUILD_PYTHON="2.7" BUILD_ARCH="x64" BUILD_NPY="1.12"
+        env: BUILD_PYTHON="2.7" BUILD_ARCH="x86_64" BUILD_NPY="1.12"
       - os: osx
-        env: BUILD_PYTHON="2.7" BUILD_ARCH="x64" BUILD_NPY="1.13"
+        env: BUILD_PYTHON="2.7" BUILD_ARCH="x86_64" BUILD_NPY="1.13"
       - os: osx
-        env: BUILD_PYTHON="3.5" BUILD_ARCH="x64" BUILD_NPY="1.12"
+        env: BUILD_PYTHON="3.5" BUILD_ARCH="x86_64" BUILD_NPY="1.12"
       - os: osx
-        env: BUILD_PYTHON="3.5" BUILD_ARCH="x64" BUILD_NPY="1.13"
+        env: BUILD_PYTHON="3.5" BUILD_ARCH="x86_64" BUILD_NPY="1.13"
       - os: osx
-        env: BUILD_PYTHON="3.6" BUILD_ARCH="x64" BUILD_NPY="1.12"
+        env: BUILD_PYTHON="3.6" BUILD_ARCH="x86_64" BUILD_NPY="1.12"
       - os: osx
-        env: BUILD_PYTHON="3.6" BUILD_ARCH="x64" BUILD_NPY="1.13"
+        env: BUILD_PYTHON="3.6" BUILD_ARCH="x86_64" BUILD_NPY="1.13"
